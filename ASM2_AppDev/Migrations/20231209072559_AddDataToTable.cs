@@ -7,7 +7,7 @@
 namespace ASM2_AppDev.Migrations
 {
     /// <inheritdoc />
-    public partial class AddCategoriesToTable : Migration
+    public partial class AddDataToTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
