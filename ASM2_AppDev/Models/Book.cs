@@ -10,8 +10,7 @@ namespace ASM2_AppDev.Models
         public string Author { get; set; }
         public string Description { get; set; }
 
-        public DateOnly PublicationDate { get; set; }
-        public string Publisher { get; set; }
+		public string Publisher { get; set; }
 
         public double Price { get; set; }
         [ValidateNever]

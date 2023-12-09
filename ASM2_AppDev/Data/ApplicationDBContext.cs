@@ -25,36 +25,44 @@ namespace ASM2_AppDev.Data
                 {
                     Id = 1,
                     Title = "C# Programming",
-                    Description = "Hello",
-                    Author = "Anne",
+					Author = "Anne",
+					Description = "Hello",
+                    Publisher = "Kim Dong",
                     Price = 10,
+                    Quantity = 10,
                     CategoryId = 1
                 },
                 new Book
                 {
                     Id = 2,
                     Title = "Java Programming",
-                    Description = "Hello",
-                    Author = "Jane",
+					Author = "Jane",
+					Description = "Hello",
+                    Publisher = "Kim Dong",
                     Price = 15,
+                    Quantity = 15,
                     CategoryId = 3
                 },
                 new Book
                 {
                     Id = 3,
                     Title = "Python Programming",
-                    Description = "Hello",
-                    Author = "Billy",
+					Author = "Billy",
+					Description = "Hello",
+                    Publisher = "Kim Dong",
                     Price = 20,
+                    Quantity = 20,
                     CategoryId = 2
                 },
                 new Book
                 {
                     Id = 4,
                     Title = "C Programming",
-                    Description = "Hello",
-                    Author = "Jessica",
+					Author = "Jessica",
+					Description = "Hello",
+                    Publisher = "Kim Dong",
                     Price = 15,
+                    Quantity = 15,
                     CategoryId = 4
                 }
             );
