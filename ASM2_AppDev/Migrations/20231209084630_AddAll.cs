@@ -7,11 +7,25 @@
 namespace ASM2_AppDev.Migrations
 {
     /// <inheritdoc />
-    public partial class AddBook : Migration
+    public partial class AddAll : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Books",
                 columns: table => new
@@ -39,6 +53,17 @@ namespace ASM2_AppDev.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "So scary", "Horror" },
+                    { 2, "So cool", "Action" },
+                    { 3, "So romance", "Romance" },
+                    { 4, "So difficult", "Science" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Books",
                 columns: new[] { "Id", "Author", "CategoryId", "Description", "ImageUrl", "Price", "Publisher", "Quantity", "Title" },
                 values: new object[,]
@@ -60,6 +85,9 @@ namespace ASM2_AppDev.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ASM2_AppDev.Models;
+using ASM2_AppDev.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,21 +7,25 @@ namespace ASM2_AppDev.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public HomeController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
-            _logger = logger;
+            _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Book> books = _unitOfWork.BookRepository.GetAll("Category").ToList();
+            return View(books);
         }
+        
 
-        public IActionResult Privacy()
+        public IActionResult AllBook()
         {
-            return View();
+            List<Book> books = _unitOfWork.BookRepository.GetAll("Category").ToList();
+            return View(books);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASM2_AppDev.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231209083211_AddBook")]
-    partial class AddBook
+    [Migration("20231209084630_AddAll")]
+    partial class AddAll
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

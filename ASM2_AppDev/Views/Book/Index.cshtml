@@ -20,6 +20,7 @@
 				<td>Price</td>
 				<td>Quantity</td>
 				<td>Category</td>
+				<td>Image</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,6 +34,7 @@
 					<td>@Book.Price</td>
 					<td>@Book.Quantity</td>
 					<td>@Book.Category.Name</td>
+					<td><img src="@Book.ImageUrl" class="img-fluid" style="width:200px;height:100px;"  /></td>
 					<td>
 						<a asp-controller="Book" asp-action="CreateUpdate" asp-route-id="@Book.Id" class="btn btn-outline-info">Edit</a>
 						<a asp-controller="Book" asp-action="Delete" asp-route-id="@Book.Id" class="btn btn-outline-danger">Delete</a>

@@ -120,5 +120,21 @@ namespace ASM2_AppDev.Controllers
             TempData["success"] = "Book Deleted successfully";
             return RedirectToAction("Index");
         }
+
+        public IActionResult BookDetails(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+
+            }
+
+            Book? book = _unitOfWork.BookRepository.Get(b => b.Id == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return View(book);
+        }
     }
 }
