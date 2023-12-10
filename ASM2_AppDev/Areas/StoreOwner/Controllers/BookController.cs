@@ -4,7 +4,7 @@ using ASM2_AppDev.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace ASM2_AppDev.Controllers
+namespace ASM2_AppDev.Areas.StoreOwner.Controllers
 {
     public class BookController : Controller
     {

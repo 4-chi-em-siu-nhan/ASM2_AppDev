@@ -7,7 +7,7 @@
 namespace ASM2_AppDev.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAll : Migration
+    public partial class additemtotable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

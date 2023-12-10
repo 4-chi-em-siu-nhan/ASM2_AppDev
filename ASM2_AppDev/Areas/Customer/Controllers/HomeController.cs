@@ -3,7 +3,7 @@ using ASM2_AppDev.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace ASM2_AppDev.Controllers
+namespace ASM2_AppDev.Areas.Customer.Controllers
 {
     public class HomeController : Controller
     {
@@ -20,7 +20,7 @@ namespace ASM2_AppDev.Controllers
             List<Book> books = _unitOfWork.BookRepository.GetAll("Category").ToList();
             return View(books);
         }
-        
+
 
         public IActionResult AllBook()
         {

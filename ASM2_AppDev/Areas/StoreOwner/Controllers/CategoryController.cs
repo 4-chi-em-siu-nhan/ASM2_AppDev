@@ -2,7 +2,7 @@
 using ASM2_AppDev.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ASM2_AppDev.Controllers
+namespace ASM2_AppDev.Areas.StoreOwner.Controllers
 {
     public class CategoryController : Controller
     {

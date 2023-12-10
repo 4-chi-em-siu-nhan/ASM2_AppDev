@@ -1,12 +1,14 @@
 ﻿using ASM2_AppDev.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASM2_AppDev.Data
 {
-    public class ApplicationDBContext : DbContext
+    public class ApplicationDBContext : IdentityDbContext
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<ApplicationUser> applicationUsers { get; set; }
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
 
