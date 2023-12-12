@@ -3,9 +3,12 @@ using ASM2_AppDev.Models;
 using ASM2_AppDev.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASM2_AppDev.Areas.StoreOwner.Controllers
 {
+    [Area("StoreOwner")]
+    [Authorize(Roles = "StoreOwner")]
     public class BookController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

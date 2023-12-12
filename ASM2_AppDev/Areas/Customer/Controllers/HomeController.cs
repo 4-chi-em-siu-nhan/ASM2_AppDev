@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace ASM2_AppDev.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

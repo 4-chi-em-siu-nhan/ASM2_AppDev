@@ -1,9 +1,12 @@
 ﻿using ASM2_AppDev.Models;
 using ASM2_AppDev.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASM2_AppDev.Areas.StoreOwner.Controllers
 {
+    [Area("StoreOwner")]
+    [Authorize(Roles = "StoreOwner")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
