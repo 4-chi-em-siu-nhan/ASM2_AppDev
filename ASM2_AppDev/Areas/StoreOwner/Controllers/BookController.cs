@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace ASM2_AppDev.Areas.StoreOwner.Controllers
 {
     [Area("StoreOwner")]
-    [Authorize(Roles = "StoreOwner")]
+    
     public class BookController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -18,11 +18,13 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
         }
+        [Authorize(Roles = "StoreOwner")]
         public IActionResult Index()
         {
             List<Book> books = _unitOfWork.BookRepository.GetAll("Category").ToList();
             return View(books);
         }
+        [Authorize(Roles = "StoreOwner")]
         public IActionResult CreateUpdate(int? id)
         {
             BookVM bookVM = new BookVM()
@@ -47,7 +49,10 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             }
 
         }
+        [Authorize(Roles = "StoreOwner")]
+
         [HttpPost]
+
         public IActionResult CreateUpdate(BookVM bookVM, IFormFile? file)
         {
 
@@ -102,6 +107,7 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             }
 
         }
+        [Authorize(Roles = "StoreOwner")]
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -115,7 +121,9 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             }
             return View(book);
         }
+
         [HttpPost]
+        [Authorize(Roles = "StoreOwner")]
         public IActionResult Delete(Book book)
         {
             _unitOfWork.BookRepository.Delete(book);
@@ -123,7 +131,7 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             TempData["success"] = "Book Deleted successfully";
             return RedirectToAction("Index");
         }
-
+        
         public IActionResult BookDetails(int? id)
         {
             if (id == null || id == 0)
@@ -139,5 +147,6 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             }
             return View(book);
         }
+
     }
 }
