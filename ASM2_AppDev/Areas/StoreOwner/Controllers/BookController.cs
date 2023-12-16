@@ -140,7 +140,7 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
 
             }
 
-            Book? book = _unitOfWork.BookRepository.Get(b => b.Id == id);
+            Book? book = _unitOfWork.BookRepository.Get(b => b.Id == id, "Category" );
             if (book == null)
             {
                 return NotFound();
