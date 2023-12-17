@@ -1,0 +1,29 @@
+﻿@model RoleManagementVM
+<div class="row pt-4 pb-4">
+    <div class="col-6">
+        <h2>Edit Role of User</h2>
+    </div>
+<form method="post" enctype="multipart/form-data">
+    <div class="border p-3 m-4">
+        <input asp-for="ApplicationUser.Id" hidden />
+        <div class="mb-3 row">
+            <label asp-for="ApplicationUser.Name"></label>
+            <input asp-for="ApplicationUser.Name">
+            <span asp-validation-for="ApplicationUser.Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3 row">
+            <label asp-for="RoleList"></label>
+            <select asp-for="ApplicationUser.Role" asp-items="@Model.RoleList">
+            <option selected> @Model.ApplicationUser.Role</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-info">Edit</button>
+        <a asp-controller="User" asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</form>
+</div>
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

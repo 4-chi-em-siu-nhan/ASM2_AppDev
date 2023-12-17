@@ -1,5 +1,8 @@
 ﻿@model Category
-<h1>Create a Category</h1>
+<div class="row pt-4 pb-4">
+    <div class="col-6">
+        <h2>Create a Category</h2>
+    </div>
 <form method="post">
     <div class="border p-3 mt-4">
         <div class="mb-3 row">
@@ -17,6 +20,7 @@
         <a asp-controller="Category" asp-action="Index" class="btn btn-secondary">Back to List</a>
     </div>
 </form>
+</div>
 @section Scripts{
     @{
         <partial name="_ValidationScriptsPartial" />

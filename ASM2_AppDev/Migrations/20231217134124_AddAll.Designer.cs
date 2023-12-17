@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASM2_AppDev.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231217080214_AddItemsToTable")]
-    partial class AddItemsToTable
+    [Migration("20231217134124_AddAll")]
+    partial class AddAll
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
