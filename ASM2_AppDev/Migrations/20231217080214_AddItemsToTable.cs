@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ASM2_AppDev.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAll : Migration
+    public partial class AddItemsToTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,7 +36,6 @@ namespace ASM2_AppDev.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -64,7 +63,8 @@ namespace ASM2_AppDev.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -205,13 +205,13 @@ namespace ASM2_AppDev.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "Description", "Name" },
+                columns: new[] { "Id", "Description", "Name", "Status" },
                 values: new object[,]
                 {
-                    { 1, "So scary", "Horror" },
-                    { 2, "So cool", "Action" },
-                    { 3, "So romance", "Romance" },
-                    { 4, "So difficult", "Science" }
+                    { 1, "So scary", "Horror", "Approval" },
+                    { 2, "So cool", "Action", "Approval" },
+                    { 3, "So romance", "Romance", "Approval" },
+                    { 4, "So difficult", "Science", "Approval" }
                 });
 
             migrationBuilder.InsertData(

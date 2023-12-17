@@ -1,12 +1,12 @@
 ﻿using ASM2_AppDev.Models;
 using ASM2_AppDev.Repository.IRepository;
+using ASM2_AppDev.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ASM2_AppDev.Areas.StoreOwner.Controllers
+namespace ASM2_AppDev.Areas.Admin.Controllers
 {
-    [Area("StoreOwner")]
-    [Authorize(Roles = "StoreOwner")]
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -19,11 +19,13 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             List<Category> categories = _unitOfWork.CategoryRepository.GetAll().ToList();
             return View(categories);
         }
+        [Authorize(Roles = SD.Role_StoreOwner)]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = SD.Role_StoreOwner)]
         public IActionResult Create(Category category)
         {
 
@@ -40,6 +42,7 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             }
             return View();
         }
+        [Authorize(Roles = SD.Role_StoreOwner)]
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -55,6 +58,7 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             return View(category);
         }
         [HttpPost]
+        [Authorize(Roles = SD.Role_StoreOwner)]
         public IActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
@@ -66,6 +70,7 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             }
             return View();
         }
+        [Authorize(Roles = SD.Role_StoreOwner)]
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -80,6 +85,7 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             return View(category);
         }
         [HttpPost]
+        [Authorize(Roles = SD.Role_StoreOwner)]
         public IActionResult Delete(Category category)
         {
             _unitOfWork.CategoryRepository.Delete(category);
@@ -87,5 +93,34 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             TempData["success"] = "Category Deleted successfully";
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = SD.Role_Admin)]
+        public IActionResult Approval(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Category? category = _unitOfWork.CategoryRepository.Get(c => c.Id == id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
+        }
+        [Authorize(Roles = SD.Role_Admin)]
+        [HttpPost]
+        public IActionResult Approval(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                category.Status = "Approval";
+                _unitOfWork.CategoryRepository.Update(category);
+                _unitOfWork.Save();
+                TempData["success"] = "Category Requested successfully";
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+
     }
 }

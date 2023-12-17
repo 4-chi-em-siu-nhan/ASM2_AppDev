@@ -12,6 +12,7 @@
             <input asp-for="Description">
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
+        <input hidden asp-for="Status" value="Pending" />
         <button type="submit" class="btn btn-primary">Submit</button>
         <a asp-controller="Category" asp-action="Index" class="btn btn-secondary">Back to List</a>
     </div>

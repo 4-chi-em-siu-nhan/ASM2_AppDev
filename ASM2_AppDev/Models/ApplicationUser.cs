@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ASM2_AppDev.Models
 {
@@ -8,6 +9,7 @@ namespace ASM2_AppDev.Models
         public string? Address { get; set; }
         public string Email {  get; set; }
         public string? City { get; set; }
+        [NotMapped]
         public string Role { get; set; }
 
     }

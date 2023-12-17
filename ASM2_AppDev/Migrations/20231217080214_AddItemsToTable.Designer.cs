@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASM2_AppDev.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231214042115_AddAll")]
-    partial class AddAll
+    [Migration("20231217080214_AddItemsToTable")]
+    partial class AddItemsToTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,6 +130,10 @@ namespace ASM2_AppDev.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
@@ -139,25 +143,29 @@ namespace ASM2_AppDev.Migrations
                         {
                             Id = 1,
                             Description = "So scary",
-                            Name = "Horror"
+                            Name = "Horror",
+                            Status = "Approval"
                         },
                         new
                         {
                             Id = 2,
                             Description = "So cool",
-                            Name = "Action"
+                            Name = "Action",
+                            Status = "Approval"
                         },
                         new
                         {
                             Id = 3,
                             Description = "So romance",
-                            Name = "Romance"
+                            Name = "Romance",
+                            Status = "Approval"
                         },
                         new
                         {
                             Id = 4,
                             Description = "So difficult",
-                            Name = "Science"
+                            Name = "Science",
+                            Status = "Approval"
                         });
                 });
 
@@ -378,10 +386,6 @@ namespace ASM2_AppDev.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

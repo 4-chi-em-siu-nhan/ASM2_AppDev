@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ASM2_AppDev.Models
 {
@@ -9,5 +11,7 @@ namespace ASM2_AppDev.Models
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
+        [Required]
+        public string Status { get; set; }
     }
 }

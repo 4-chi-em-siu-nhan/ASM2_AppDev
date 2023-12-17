@@ -4,11 +4,12 @@ using ASM2_AppDev.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using ASM2_AppDev.Utility;
 
-namespace ASM2_AppDev.Areas.StoreOwner.Controllers
+namespace ASM2_AppDev.Areas.Admin.Controllers
 {
-    [Area("StoreOwner")]
-    
+    [Area("Admin")]
+
     public class BookController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -18,13 +19,13 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
         }
-        [Authorize(Roles = "StoreOwner")]
+        [Authorize(Roles = SD.Role_StoreOwner)]
         public IActionResult Index()
         {
             List<Book> books = _unitOfWork.BookRepository.GetAll("Category").ToList();
             return View(books);
         }
-        [Authorize(Roles = "StoreOwner")]
+        [Authorize(Roles = SD.Role_StoreOwner)]
         public IActionResult CreateUpdate(int? id)
         {
             BookVM bookVM = new BookVM()
@@ -49,7 +50,7 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             }
 
         }
-        [Authorize(Roles = "StoreOwner")]
+        [Authorize(Roles = SD.Role_StoreOwner)]
 
         [HttpPost]
 
@@ -107,7 +108,7 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             }
 
         }
-        [Authorize(Roles = "StoreOwner")]
+        [Authorize(Roles = SD.Role_StoreOwner)]
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -123,7 +124,7 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "StoreOwner")]
+        [Authorize(Roles = SD.Role_StoreOwner)]
         public IActionResult Delete(Book book)
         {
             _unitOfWork.BookRepository.Delete(book);
@@ -131,7 +132,7 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
             TempData["success"] = "Book Deleted successfully";
             return RedirectToAction("Index");
         }
-        
+
         public IActionResult BookDetails(int? id)
         {
             if (id == null || id == 0)
@@ -140,7 +141,7 @@ namespace ASM2_AppDev.Areas.StoreOwner.Controllers
 
             }
 
-            Book? book = _unitOfWork.BookRepository.Get(b => b.Id == id, "Category" );
+            Book? book = _unitOfWork.BookRepository.Get(b => b.Id == id, "Category");
             if (book == null)
             {
                 return NotFound();

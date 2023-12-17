@@ -17,10 +17,10 @@ namespace ASM2_AppDev.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "Horror", Description = "So scary"},
-                new Category { Id = 2, Name = "Action", Description = "So cool"},
-                new Category { Id = 3, Name = "Romance", Description = "So romance"},
-                new Category { Id = 4, Name = "Science", Description = "So difficult"}
+                new Category { Id = 1, Name = "Horror", Description = "So scary", Status = "Approval"},
+                new Category { Id = 2, Name = "Action", Description = "So cool", Status = "Approval"},
+                new Category {Id = 3, Name = "Romance", Description = "So romance", Status = "Approval" },
+                new Category {Id = 4, Name = "Science", Description = "So difficult", Status = "Approval" }
             );
             modelBuilder.Entity<Book>().HasData(
                 new Book
