@@ -4,6 +4,8 @@
     {
         ICategoryRepository CategoryRepository { get; }
         IBookRepository BookRepository { get; }
+        IOrderDetailRepository OrderDetail { get; }
+        IOrderHeaderRepository OrderHeader { get; }
         void Save();
 
     }

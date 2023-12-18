@@ -1,0 +1,49 @@
+﻿@model List<OrderHeader>
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Order List</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var OrderHeader in Model)
+                {
+                    <tr>
+                        <td>@OrderHeader.Id</td>
+                        <td>@OrderHeader.Name</td>
+                        <td>@OrderHeader.PhoneNumber</td>
+                        <td>@OrderHeader.Address</td>
+                        <td>@OrderHeader.City/td>
+                        <td>@OrderHeader.OrderDate</td>
+                        <td>@OrderHeader.OrderTotal</td>
+                        <td>
+                            <a asp-controller="OrderHeader" asp-action="CreateUpdate" asp-route-id="@OrderHeader.Id" class="btn btn-outline-info">Edit</a>
+                            <a asp-controller="OrderHeader" asp-action="Delete" asp-route-id="@OrderHeader.Id" class="btn btn-outline-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/order.js"></script>
+}
