@@ -9,6 +9,7 @@ namespace ASM2_AppDev.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<ApplicationUser> applicationUsers { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<OrderHeader> OrderHeaders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
@@ -33,7 +34,6 @@ namespace ASM2_AppDev.Data
 					Description = "Hello",
                     Publisher = "Kim Dong",
                     Price = 10,
-                    Quantity = 10,
                     CategoryId = 1
                 },
                 new Book
@@ -44,7 +44,6 @@ namespace ASM2_AppDev.Data
 					Description = "Hello",
                     Publisher = "Kim Dong",
                     Price = 15,
-                    Quantity = 15,
                     CategoryId = 3
                 },
                 new Book
@@ -55,7 +54,6 @@ namespace ASM2_AppDev.Data
 					Description = "Hello",
                     Publisher = "Kim Dong",
                     Price = 20,
-                    Quantity = 20,
                     CategoryId = 2
                 },
                 new Book
@@ -66,7 +64,6 @@ namespace ASM2_AppDev.Data
 					Description = "Hello",
                     Publisher = "Kim Dong",
                     Price = 15,
-                    Quantity = 15,
                     CategoryId = 4
                 }
             );

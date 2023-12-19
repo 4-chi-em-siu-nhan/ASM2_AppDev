@@ -4,6 +4,7 @@
     {
         ICategoryRepository CategoryRepository { get; }
         IBookRepository BookRepository { get; }
+        IShoppingCartRepository ShoppingCartRepository { get; }
         IOrderDetailRepository OrderDetail { get; }
         IOrderHeaderRepository OrderHeader { get; }
         void Save();

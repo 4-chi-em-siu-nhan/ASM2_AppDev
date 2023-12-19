@@ -32,11 +32,6 @@
                     <span asp-validation-for="Book.Price" class="text-danger"></span>
                 </div>
                 <div class="mb-3 row">
-                    <label asp-for="Book.Quantity"></label>
-                    <input asp-for="Book.Quantity">
-                    <span asp-validation-for="Book.Quantity" class="text-danger"></span>
-                </div>
-                <div class="mb-3 row">
                     <label asp-for="Book.CategoryId"></label>
                     <select asp-for="Book.CategoryId" asp-items="@Model.Categories"></select>
                     <span asp-validation-for="Book.CategoryId" class="text-danger"></span>

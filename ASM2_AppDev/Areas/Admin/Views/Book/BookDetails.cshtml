@@ -35,10 +35,13 @@
                     <div> Publisher: @Model.Publisher</div> </br>
                     <div class="d-flex">
                         <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                        <a asp-area="Customer" asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
+                        
                         <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                            <i class="bi-cart-fill me-1"></i>
+                            <i class="bi-cart-fill me-1" ></i>
                             Add to cart
                         </button>
+                        </a>
                     </div>
                 </div>
             </div>

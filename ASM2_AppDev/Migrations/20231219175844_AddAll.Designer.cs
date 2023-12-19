@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASM2_AppDev.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231218150821_AddItemToTable")]
-    partial class AddItemToTable
+    [Migration("20231219175844_AddAll")]
+    partial class AddAll
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,15 +47,12 @@ namespace ASM2_AppDev.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Publisher")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -74,9 +71,8 @@ namespace ASM2_AppDev.Migrations
                             Author = "Anne",
                             CategoryId = 1,
                             Description = "Hello",
-                            Price = 10.0,
+                            Price = 10m,
                             Publisher = "Kim Dong",
-                            Quantity = 10,
                             Title = "C# Programming"
                         },
                         new
@@ -85,9 +81,8 @@ namespace ASM2_AppDev.Migrations
                             Author = "Jane",
                             CategoryId = 3,
                             Description = "Hello",
-                            Price = 15.0,
+                            Price = 15m,
                             Publisher = "Kim Dong",
-                            Quantity = 15,
                             Title = "Java Programming"
                         },
                         new
@@ -96,9 +91,8 @@ namespace ASM2_AppDev.Migrations
                             Author = "Billy",
                             CategoryId = 2,
                             Description = "Hello",
-                            Price = 20.0,
+                            Price = 20m,
                             Publisher = "Kim Dong",
-                            Quantity = 20,
                             Title = "Python Programming"
                         },
                         new
@@ -107,9 +101,8 @@ namespace ASM2_AppDev.Migrations
                             Author = "Jessica",
                             CategoryId = 4,
                             Description = "Hello",
-                            Price = 15.0,
+                            Price = 15m,
                             Publisher = "Kim Dong",
-                            Quantity = 15,
                             Title = "C Programming"
                         });
                 });
@@ -243,6 +236,40 @@ namespace ASM2_AppDev.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("OrderHeaders");
+                });
+
+            modelBuilder.Entity("ASM2_AppDev.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -481,7 +508,7 @@ namespace ASM2_AppDev.Migrations
 
             modelBuilder.Entity("ASM2_AppDev.Models.OrderDetail", b =>
                 {
-                    b.HasOne("ASM2_AppDev.Models.Book", "book")
+                    b.HasOne("ASM2_AppDev.Models.Book", "Book")
                         .WithMany()
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -493,9 +520,9 @@ namespace ASM2_AppDev.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("OrderHeader");
+                    b.Navigation("Book");
 
-                    b.Navigation("book");
+                    b.Navigation("OrderHeader");
                 });
 
             modelBuilder.Entity("ASM2_AppDev.Models.OrderHeader", b =>
