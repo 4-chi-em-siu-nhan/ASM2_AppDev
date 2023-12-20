@@ -7,26 +7,10 @@ namespace ASM2_AppDev.Models
     public class OrderHeader
     {
         public int Id { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
-
+        public string Email { get; set; }
         public DateTime OrderDate { get; set; }
-        public double OrderTotal { get; set; }
+        public string OrderCode { get; set; }
+        
 
-        public string? OrderStatus { get; set; }
-
-        [Required]
-        public string PhoneNumber { get; set; }
-
-        [Required]
-        public string Address { get; set; }
-
-        [Required]
-        public string City { get; set; }
-
-        [Required]
-        public string State { get; set; }
-
-        [Required]
-        public string Name { get; set; }
     }
 }

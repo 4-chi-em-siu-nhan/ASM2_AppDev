@@ -6,57 +6,55 @@ using Microsoft.CodeAnalysis;
 using System.Security.Claims;
 using ASM2_AppDev.Models.ViewModels;
 using ASM2_AppDev.Models;
+using ASM2_AppDev.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASM2_AppDev.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class OrderController : Controller
     {
-      
-
         [BindProperty]
         public OrderVM OrderVM { get; set; }
-        public OrderController(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-            
-        }
+        private readonly ApplicationDBContext _dbContext;
         private readonly IUnitOfWork _unitOfWork;
-
-        public IActionResult Index()
+        public OrderController(IUnitOfWork unitOfWork, ApplicationDBContext dbContext)
         {
-            List<OrderHeader> orderHeaders = _unitOfWork.OrderHeader.GetAll().ToList();
-            return View(orderHeaders);
+            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await _dbContext.OrderHeaders.OrderByDescending(p => p.Id).ToListAsync());
         }
 
 
-        public IActionResult Details(int orderId)
+        public async Task<IActionResult> Details(string ordercode)
         {
-            OrderVM = new()
-            {
-                OrderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == orderId, includeProperty: "ApplicationUser"),
-                OrderDetail = _unitOfWork.OrderDetail.GetAll("Book")
-            };
 
-            return View(OrderVM);
+            var orderDetail = await _dbContext.OrderDetails.Include(o => o.Book).Where(o => o.OrderCode == ordercode).ToListAsync();
+            return View(orderDetail);
         }
 
-        [HttpPost]
-        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_StoreOwner)]
-        public IActionResult UpdateOrderDetail()
-        {
-            var orderHeaderFromDb = _unitOfWork.OrderHeader.Get(u => u.Id == OrderVM.OrderHeader.Id);
-            orderHeaderFromDb.Name = OrderVM.OrderHeader.Name;
-            orderHeaderFromDb.PhoneNumber = OrderVM.OrderHeader.PhoneNumber;
-            orderHeaderFromDb.Address = OrderVM.OrderHeader.Address;
-            orderHeaderFromDb.City = OrderVM.OrderHeader.City;
-            orderHeaderFromDb.State = OrderVM.OrderHeader.State;
-            _unitOfWork.OrderHeader.Update(orderHeaderFromDb);
-            _unitOfWork.Save();
 
-            TempData["Success"] = "Order Details Updated Successfully.";
 
-            return RedirectToAction(nameof(Details), new { orderId = orderHeaderFromDb.Id });
-        }
+
+        //public IActionResult Index()
+        //{
+        //    List<OrderHeader> orderHeaders = _unitOfWork.OrderHeader.GetAll().ToList();
+        //    return View(orderHeaders);
+        //}
+
+        //public IActionResult Details(string ordercode)
+        //{
+        //    OrderVM = new()
+        //    {
+        //        OrderHeader = _unitOfWork.OrderHeader.Get(u => u.OrderCode == ordercode, includeProperty: "ApplicationUser"),
+        //        OrderDetails = (IEnumerable<OrderDetails>)_unitOfWork.OrderDetails.Get(u => u.OrderCode == ordercode, includeProperty: "Book")
+        //    };
+
+        //    return View(OrderVM);
+        //}
     }
 }

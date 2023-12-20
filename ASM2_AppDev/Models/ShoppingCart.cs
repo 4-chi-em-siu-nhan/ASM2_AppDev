@@ -8,7 +8,6 @@ namespace ASM2_AppDev.Models
     {
         public int Id { get; set; }
         public int BookId { get; set; }
-        
         public string Title { get; set; }
         public string Author { get; set; }
 
@@ -26,13 +25,11 @@ namespace ASM2_AppDev.Models
         }
         public ShoppingCart(Book book)
         {
-
             BookId = book.Id;
             Title = book.Title;
             Quantity = 1;
             Price = book.Price;
             Author = book.Author;
-            
             Image = book.ImageUrl;
         }
     }

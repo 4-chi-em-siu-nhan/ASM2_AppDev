@@ -6,6 +6,6 @@ namespace ASM2_AppDev.Models.ViewModels
     {
         public OrderHeader OrderHeader { get; set; }
         [ValidateNever]
-        public IEnumerable<OrderDetail> OrderDetail { get; set; }
+        public IEnumerable<OrderDetails> OrderDetails { get; set; }
     }
 }

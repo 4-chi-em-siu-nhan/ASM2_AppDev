@@ -1,24 +1,19 @@
-﻿@model List<OrderHeader>
-<div class="card shadow border-0 my-4">
-    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">Order List</h2>
-            </div>
-        </div>
+﻿@model IEnumerable<OrderHeader>
+<div class="row pt-4 pb-4">
+    <div class="col-6 pb-4">
+        <h2>List of Orders</h2>
     </div>
-    <div class="card-body p-4">
+
+    <div>
         <table id="tblData" class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
-                    <th>City</th>
+                    <th>Order Code</th>
+                    <th>Email</th>
                     <th>Date</th>
-                    <th>Total</th>
                     <th></th>
+
                 </tr>
             </thead>
             <tbody>
@@ -26,16 +21,13 @@
                 {
                     <tr>
                         <td>@OrderHeader.Id</td>
-                        <td>@OrderHeader.Name</td>
-                        <td>@OrderHeader.PhoneNumber</td>
-                        <td>@OrderHeader.Address</td>
-                        <td>@OrderHeader.City/td>
+                        <td>@OrderHeader.OrderCode</td>
+                        <td>@OrderHeader.Email</td>
                         <td>@OrderHeader.OrderDate</td>
-                        <td>@OrderHeader.OrderTotal</td>
                         <td>
-                            <a asp-controller="OrderHeader" asp-action="CreateUpdate" asp-route-id="@OrderHeader.Id" class="btn btn-outline-info">Edit</a>
-                            <a asp-controller="OrderHeader" asp-action="Delete" asp-route-id="@OrderHeader.Id" class="btn btn-outline-danger">Delete</a>
+                            <a asp-area="Admin" asp-controller="Order" asp-action="Details" asp-route-ordercode="@OrderHeader.OrderCode" class="btn btn-outline-info">Detail</a>
                         </td>
+
                     </tr>
                 }
             </tbody>
@@ -44,6 +36,6 @@
     </div>
 </div>
 
-@section Scripts{
-    <script src="~/js/order.js"></script>
+@section Scripts {
+    <script src="~/js/user.js"></script>
 }

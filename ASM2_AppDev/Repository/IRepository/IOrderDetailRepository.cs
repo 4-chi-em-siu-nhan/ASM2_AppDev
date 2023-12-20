@@ -2,8 +2,8 @@
 
 namespace ASM2_AppDev.Repository.IRepository
 {
-    public interface IOrderDetailRepository : IRepository<OrderDetail>
+    public interface IOrderDetailRepository : IRepository<OrderDetails>
     {
-        void Update(OrderDetail obj);
+        void Update(OrderDetails obj);
     }
 }

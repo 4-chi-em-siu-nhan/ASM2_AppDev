@@ -28,6 +28,10 @@ namespace ASM2_AppDev.Areas.Customer.Controllers
             List<Book> books = _unitOfWork.BookRepository.GetAll("Category").ToList();
             return View(books);
         }
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

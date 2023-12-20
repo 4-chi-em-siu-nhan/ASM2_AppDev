@@ -34,7 +34,9 @@
                     <div> Category: @Model.Category.Name</div> </br>
                     <div> Publisher: @Model.Publisher</div> </br>
                     <div class="d-flex">
-                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                        <div class="form-outline">
+                            <input class="form-control text-center me-2" type="text" value="1" style="max-width: 3rem" disabled />
+                        </div>
                         <a asp-area="Customer" asp-controller="Cart" asp-action="Add" asp-route-id="@Model.Id">
                         
                         <button class="btn btn-outline-dark flex-shrink-0" type="button">

@@ -10,7 +10,7 @@ namespace ASM2_AppDev.Repository
         public IBookRepository BookRepository { get; private set; }
         public IShoppingCartRepository ShoppingCartRepository { get; private set; }
         public IOrderHeaderRepository OrderHeader { get; private set; }
-        public IOrderDetailRepository OrderDetail { get; private set; }
+        public IOrderDetailRepository OrderDetails { get; private set; }
 
         public UnitOfWork(ApplicationDBContext dBContext)
         {
@@ -18,7 +18,7 @@ namespace ASM2_AppDev.Repository
             CategoryRepository = new CategoryRepository(dBContext);
             ShoppingCartRepository = new ShoppingCartRepository(dBContext);
             BookRepository = new BookRepository(dBContext);
-            OrderDetail = new OrderDetailRepository(dBContext);
+            OrderDetails = new OrderDetailRepository(dBContext);
             OrderHeader = new OrderHeaderRepository(dBContext);
         
         }

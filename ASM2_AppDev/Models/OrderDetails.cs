@@ -4,23 +4,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ASM2_AppDev.Models
 {
-    public class OrderDetail
+    public class OrderDetails
     {
+        
         public int Id { get; set; }
-        [Required]
-        public int OrderHeaderId { get; set; }
-
-        [ForeignKey("OrderHeaderId")]
-        [ValidateNever]
-        public OrderHeader OrderHeader { get; set; }
-
-        [Required]
+        public string Email { get; set; }
         public int BookId { get; set; }
         [ForeignKey("BookId")]
-        [ValidateNever]
         public Book Book { get; set; }
-
-        public int Count { get; set; }
-        public double Price { get; set; }
+        public string OrderCode { get; set; }
+        public int Quantity { get; set; }
+        public decimal Price { get; set; }
     }
 }

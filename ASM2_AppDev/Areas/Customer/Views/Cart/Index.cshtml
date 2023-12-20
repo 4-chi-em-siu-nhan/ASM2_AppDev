@@ -1,12 +1,12 @@
 ﻿@using ASM2_AppDev.Utility;
 @model ShoppingCartVM
-<section class="h-100 gradient-custom">
+<section class="h-100" style="background-color: #eee;">
     <div class="container py-5">
         <div class="row d-flex justify-content-center my-4">
             <div class="col-md-8">
                 <div class="card mb-4">
                     <div class="card-header py-3">
-                        <h5 class="mb-0">Shopping Bag</h5>
+                        <h5 class="mb-0">Shopping Cart</h5>
                     </div>
                     @if (Model.ShoppingCartList.Count > 0)
                     {
@@ -74,7 +74,11 @@
                     }
                     else
                     {
-                        <h4>Your cart is empty</h4>
+                        <img src="https://www.adasglobal.com/img/empty-cart.png" height="500" width="500" class="w-100" alt="" />
+                        <div class="d-flex justify-content-center mx-2 mb-2 mb-lg-4">
+                        <a asp-controller="Home" asp-action="AllBook" class="btn btn-outline-danger text-uppercase">Go to Shop</a>
+                        </div>
+                    
                     }
                 </div>
                 
@@ -106,11 +110,11 @@
                         </ul>
                         @if (User.IsInRole(SD.Role_Customer))
                         {
-                            <a asp-controller="CheckOut" asp-action="Increase">
-                                <button type="button" class=" form-control text-center btn btn-primary btn-lg btn-block">
+                            <div class="d-flex justify-content-center mx-2 mb-2 mb-lg-4">
+                                <a asp-area="Customer" asp-controller="Checkout" asp-action="Checkout" class="btn btn-outline-primary text-uppercase">
                                     Go to checkout
-                                </button>
                             </a>
+                            </div>
                         }
                         else 
                         {
