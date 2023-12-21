@@ -48,7 +48,7 @@ namespace ASM2_AppDev.Areas.Customer.Controllers
             }
             HttpContext.Session.SetJson("Cart", cart);
             TempData["success"] = "Add to cart successfully";
-            
+
             return Redirect(Request.Headers["Referer"].ToString());
         }
         public async Task<IActionResult> Increase(int? Id)

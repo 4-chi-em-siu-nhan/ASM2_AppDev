@@ -2,7 +2,8 @@
 <partial name="_Notification" />
 <h1> Delete the Book</h1>
 <form method="post">
-    <div class="border p-3 mt-4">
+    <div class="row border p-3 mt-4">
+        <div class="col-6">
         <div class="mb-3 row">
             <label asp-for="Title"></label>
             <input asp-for="Title" disabled>
@@ -29,5 +30,9 @@
         </div>
         <button type="submit" class="btn btn-danger">Delete</button>
         <a asp-controller="Book" asp-action="Index" class="btn btn-secondary">Back to List</a>
-    </div>
+        </div>
+        <div class="col-6">
+        <img src="@Model.ImageUrl" width="100%" />
+        </div>
+     </div>
 </form>
