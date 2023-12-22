@@ -121,6 +121,31 @@ namespace ASM2_AppDev.Areas.Admin.Controllers
             }
             return View();
         }
-
+        public IActionResult Reject(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Category? category = _unitOfWork.CategoryRepository.Get(c => c.Id == id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
+        }
+        [Authorize(Roles = SD.Role_Admin)]
+        [HttpPost]
+        public IActionResult Reject(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                _unitOfWork.CategoryRepository.Delete(category);
+                _unitOfWork.Save();
+                TempData["success"] = "Category Deleted successfully";
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
 }

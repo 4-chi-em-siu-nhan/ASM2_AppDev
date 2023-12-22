@@ -30,7 +30,7 @@ namespace ASM2_AppDev.Areas.Admin.Controllers
         {
             BookVM bookVM = new BookVM()
             {
-                Categories = _unitOfWork.CategoryRepository.GetAll().Select(c => new SelectListItem
+                Categories = _unitOfWork.CategoryRepository.GetAllApproval().Select(c => new SelectListItem
                 {
                     Text = c.Name,
                     Value = c.Id.ToString(),

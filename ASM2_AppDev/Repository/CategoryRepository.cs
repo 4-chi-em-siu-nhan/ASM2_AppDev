@@ -15,5 +15,10 @@ namespace ASM2_AppDev.Repository
         {
             _dbContext.Categories.Update(entity);
         }
+        public IEnumerable<Category> GetAllApproval()
+        {
+            var categories = _dbContext.Categories.Where(c => c.Status == "Approval").ToList();
+            return categories;
+        }
     }
 }

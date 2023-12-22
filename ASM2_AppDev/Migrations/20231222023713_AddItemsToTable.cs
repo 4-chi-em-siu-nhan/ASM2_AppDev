@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ASM2_AppDev.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAll : Migration
+    public partial class AddItemsToTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -69,6 +69,21 @@ namespace ASM2_AppDev.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderHeaders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OrderCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderHeaders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -196,28 +211,6 @@ namespace ASM2_AppDev.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderHeaders",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OrderCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderHeaders", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_OrderHeaders_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Books",
                 columns: table => new
                 {
@@ -335,11 +328,6 @@ namespace ASM2_AppDev.Migrations
                 name: "IX_OrderDetails_BookId",
                 table: "OrderDetails",
                 column: "BookId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderHeaders_ApplicationUserId",
-                table: "OrderHeaders",
-                column: "ApplicationUserId");
         }
 
         /// <inheritdoc />
@@ -373,10 +361,10 @@ namespace ASM2_AppDev.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Books");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Books");
 
             migrationBuilder.DropTable(
                 name: "Categories");
