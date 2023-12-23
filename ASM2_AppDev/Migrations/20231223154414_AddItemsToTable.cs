@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ASM2_AppDev.Migrations
 {
     /// <inheritdoc />
-    public partial class AddAll : Migration
+    public partial class AddItemsToTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

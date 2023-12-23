@@ -119,28 +119,28 @@ namespace ASM2_AppDev.Areas.Identity.Pages.Account.Manage
             var email = Input.Email;
             var address = Input.Address;
             var city = Input.City;
-            if (Input.FullName != fullName)
+            if (user.FullName != fullName)
             {
                 user.FullName = fullName;
                 await _userManager.UpdateAsync(user);
             }
-            if (Input.Email != email)
+            if (user.Email != email)
             {
                 user.Email = email;
                 await _userManager.UpdateAsync(user);
             }
-            if (Input.Address != address)
+            if (user.Address != address)
             {
                 user.Address = address;
                 await _userManager.UpdateAsync(user);
             }
-            if (Input.City != city)
+            if (user.City != city)
             {
                 user.City = city;
                 await _userManager.UpdateAsync(user);
             }
 
-            if (Input.PhoneNumber != phoneNumber)
+            if (user.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
