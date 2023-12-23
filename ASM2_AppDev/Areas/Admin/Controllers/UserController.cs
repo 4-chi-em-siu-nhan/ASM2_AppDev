@@ -1,12 +1,9 @@
 ﻿using ASM2_AppDev.Data;
 using ASM2_AppDev.Models;
-using ASM2_AppDev.Models.ViewModels;
 using ASM2_AppDev.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Data;
 
 namespace ASM2_AppDev.Areas.Admin.Controllers
 {
@@ -15,9 +12,9 @@ namespace ASM2_AppDev.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly ApplicationDBContext _dbContext;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly IPasswordHasher<IdentityUser> _passwordHash;
-        public UserController(ApplicationDBContext dBContext, UserManager<IdentityUser> userManager, IPasswordHasher<IdentityUser> passwordHash)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IPasswordHasher<ApplicationUser> _passwordHash;
+        public UserController(ApplicationDBContext dBContext, UserManager<ApplicationUser> userManager, IPasswordHasher<ApplicationUser> passwordHash)
         {
             _dbContext = dBContext;
             _userManager = userManager;
@@ -26,7 +23,7 @@ namespace ASM2_AppDev.Areas.Admin.Controllers
         public IActionResult Index()
         {
 
-            List<ApplicationUser> usersList = _dbContext.applicationUsers.ToList();
+            List<ApplicationUser> usersList = _dbContext.Users.ToList();
             var userRoles = _dbContext.UserRoles.ToList();
             var roles = _dbContext.Roles.ToList();
 
@@ -37,41 +34,7 @@ namespace ASM2_AppDev.Areas.Admin.Controllers
             }
             return View(usersList);
         }
-        
-        public IActionResult Edit(string? id)
-        {
-            RoleManagementVM roleManagementVM = new()
-            {
-                ApplicationUser = _dbContext.applicationUsers.FirstOrDefault(u => u.Id.Equals(id)),
-                RoleList = _dbContext.Roles.ToList().Select(u => new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Name
-                })
-            };
-            var roleId = _dbContext.UserRoles.FirstOrDefault(u => u.UserId == id).RoleId;
-            roleManagementVM.ApplicationUser.Role = _dbContext.Roles.FirstOrDefault(u => u.Id == roleId).Name;
 
-            return View(roleManagementVM);
-
-        }
-
-
-        [HttpPost]
-        public IActionResult Edit(RoleManagementVM obj)
-        {
-            var roleId = _dbContext.UserRoles.FirstOrDefault(u => u.UserId == obj.ApplicationUser.Id).RoleId;
-            var oldRole = _dbContext.Roles.FirstOrDefault(u => u.Id == roleId).Name;
-            if (!(obj.ApplicationUser.Role == oldRole))
-            {
-                ApplicationUser applicationUser = _dbContext.applicationUsers.FirstOrDefault(u => u.Id == obj.ApplicationUser.Id);
-                _userManager.RemoveFromRoleAsync(applicationUser, oldRole).GetAwaiter().GetResult();
-                _userManager.AddToRoleAsync(applicationUser, obj.ApplicationUser.Role).GetAwaiter().GetResult();
-            }
-
-            return RedirectToAction("Index", "User");
-
-        }
         private void Errors(IdentityResult result)
         {
             foreach (IdentityError error in result.Errors)
@@ -91,7 +54,7 @@ namespace ASM2_AppDev.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangePassword(string id, string password)
         {
-            IdentityUser user = await _userManager.FindByIdAsync(id);
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
 
