@@ -19,6 +19,7 @@
 				<th>Category Name</th>
 				<th>Description</th>
 				<th>Status</th>
+				<th colspan="2"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,26 +29,22 @@
 					<td>@category.Name</td>
 					<td>@category.Description</td>
 					<td>@category.Status</td>
-					<td>
-						@if (User.IsInRole(SD.Role_StoreOwner))
+					@if (User.IsInRole(SD.Role_StoreOwner))
+					{
+						@if (category.Status == "Approval")
 						{
-							@if (category.Status == "Approval")
-							{
-								<div>
-									<a asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-outline-info">Edit</a>
-									<a asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-outline-danger">Delete</a>
-								</div>
-							}
+							<td><a asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id" class="btn btn-outline-info">Edit</a></td>
+							<td><a asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-outline-danger">Delete</a></td>
 						}
-						@if (User.IsInRole(SD.Role_Admin))
+					}
+					@if (User.IsInRole(SD.Role_Admin))
+					{
+						@if (category.Status == "Pending")
 						{
-							@if (category.Status == "Pending")
-							{
-								<a asp-controller="Category" asp-action="Approval" asp-route-id="@category.Id" class="btn btn-info">Approval</a>
-								<a asp-controller="Category" asp-action="Reject" asp-route-id="@category.Id" class="btn btn-danger">Reject</a>
-							}
+							<td><a asp-controller="Category" asp-action="Approval" asp-route-id="@category.Id" class="btn btn-outline-info">Approval</a></td>
+							<td><a asp-controller="Category" asp-action="Reject" asp-route-id="@category.Id" class="btn btn-outline-danger">Reject</a></td>
 						}
-					</td>
+					}
 				</tr>
 			}
 		</tbody>

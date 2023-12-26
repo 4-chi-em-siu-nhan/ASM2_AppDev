@@ -116,17 +116,11 @@ namespace ASM2_AppDev.Areas.Identity.Pages.Account.Manage
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             var fullName = Input.FullName;
-            var email = Input.Email;
             var address = Input.Address;
             var city = Input.City;
             if (user.FullName != fullName)
             {
                 user.FullName = fullName;
-                await _userManager.UpdateAsync(user);
-            }
-            if (user.Email != email)
-            {
-                user.Email = email;
                 await _userManager.UpdateAsync(user);
             }
             if (user.Address != address)

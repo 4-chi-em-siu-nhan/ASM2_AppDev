@@ -19,6 +19,7 @@
 				<th>Price</th>
 				<th>Category</th>
 				<th>Image</th>
+				<th colspan="2"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,6 +35,8 @@
 					<td><img src="@Book.ImageUrl" class="img-fluid" style="width:200px;height:100px;"  /></td>
 					<td>
 						<a asp-controller="Book" asp-action="CreateUpdate" asp-route-id="@Book.Id" class="btn btn-outline-info">Edit</a>
+					</td>
+					<td>
 						<a asp-controller="Book" asp-action="Delete" asp-route-id="@Book.Id" class="btn btn-outline-danger">Delete</a>
 					</td>
 				</tr>

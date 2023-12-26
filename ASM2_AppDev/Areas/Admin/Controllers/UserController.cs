@@ -66,6 +66,7 @@ namespace ASM2_AppDev.Areas.Admin.Controllers
                 if (!string.IsNullOrEmpty(password))
                 {
                     IdentityResult result = await _userManager.UpdateAsync(user);
+                    TempData["success"] = "User changed their password successfully";
                     if (result.Succeeded)
                         return RedirectToAction("Index", "User");
                     else
