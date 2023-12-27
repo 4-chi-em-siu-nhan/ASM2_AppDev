@@ -14,14 +14,10 @@ namespace ASM2_AppDev.Areas.Admin.Controllers
     [Area("Admin")]
     public class OrderController : Controller
     {
-        [BindProperty]
-        public OrderVM OrderVM { get; set; }
         private readonly ApplicationDBContext _dbContext;
-        private readonly IUnitOfWork _unitOfWork;
-        public OrderController(IUnitOfWork unitOfWork, ApplicationDBContext dbContext)
+        public OrderController(ApplicationDBContext dbContext)
         {
             _dbContext = dbContext;
-            _unitOfWork = unitOfWork;
         }
 
         public async Task<IActionResult> Index()
@@ -36,25 +32,5 @@ namespace ASM2_AppDev.Areas.Admin.Controllers
             var orderDetail = await _dbContext.OrderDetails.Include(o => o.Book).Where(o => o.OrderCode == ordercode).ToListAsync();
             return View(orderDetail);
         }
-
-
-
-
-        //public IActionResult Index()
-        //{
-        //    List<OrderHeader> orderHeaders = _unitOfWork.OrderHeader.GetAll().ToList();
-        //    return View(orderHeaders);
-        //}
-
-        //public IActionResult Details(string ordercode)
-        //{
-        //    OrderVM = new()
-        //    {
-        //        OrderHeader = _unitOfWork.OrderHeader.Get(u => u.OrderCode == ordercode, includeProperty: "ApplicationUser"),
-        //        OrderDetails = (IEnumerable<OrderDetails>)_unitOfWork.OrderDetails.Get(u => u.OrderCode == ordercode, includeProperty: "Book")
-        //    };
-
-        //    return View(OrderVM);
-        //}
     }
 }
